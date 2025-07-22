@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Listado de Clientes</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1>Listado de Clientes</h1>
+            <a th:href="@{/clientes/nuevo}" class="btn btn-primary">
+                <i class="bi bi-plus-circle-fill"></i> Nuevo Cliente
+            </a>
+        </div>
+        
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.nombre}">Juan</td>
+                    <td th:text="${cliente.apellido}">Pérez</td>
+                    <td th:text="${cliente.email}">juan.perez@example.com</td>
+                    <td th:text="${cliente.telefono}">+595...</td>
+                    <td>
+                        <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-sm btn-warning">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                        <a th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('¿Estás seguro de que deseas eliminar a este cliente?');">
+                           <i class="bi bi-trash-fill"></i> Eliminar
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
