@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Inicio - SACPE</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container text-center">
+            <h1 class="display-4">¡Bienvenido a SACPE!</h1>
+            <p class="lead text-muted">Tu Sistema de Administración y Control para Peluquerías.</p>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row text-center">
+            <div class="col-lg-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-calendar-week-fill fs-1 text-primary"></i>
+                        <h5 class="card-title mt-3">Gestionar Agenda</h5>
+                        <p class="card-text">Visualiza y administra todas las citas en el calendario.</p>
+                        <a th:href="@{/citas}" class="btn btn-primary">Ir a la Agenda</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-people-fill fs-1 text-success"></i>
+                        <h5 class="card-title mt-3">Administrar Clientes</h5>
+                        <p class="card-text">Consulta, añade o edita la información de tus clientes.</p>
+                        <a th:href="@{/clientes}" class="btn btn-success">Ver Clientes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-box-seam-fill fs-1 text-warning"></i>
+                        <h5 class="card-title mt-3">Control de Inventario</h5>
+                        <p class="card-text">Gestiona el stock de tus productos de venta y uso interno.</p>
+                        <a th:href="@{/productos}" class="btn btn-warning">Ver Productos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

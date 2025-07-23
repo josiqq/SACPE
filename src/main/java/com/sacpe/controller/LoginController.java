@@ -20,7 +20,7 @@ public class LoginController {
      * y lo redirigirá automáticamente a la página de /login.
      */
     @GetMapping("/")
-    public String redirectToAgenda() {
-        return "redirect:/citas";
+    public String home() {
+        return "home";
     }
 }
