@@ -1,48 +1,112 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
 <head>
     <title>Inicio - SACPE</title>
 </head>
+
 <body>
     <div layout:fragment="content">
-        <div class="container text-center">
-            <h1 class="display-4">¡Bienvenido a SACPE!</h1>
-            <p class="lead text-muted">Tu Sistema de Administración y Control para Peluquerías.</p>
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">¡Bienvenido a SACPE!</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300">Tu Sistema de Administración y Control para Peluquerías.
+            </p>
         </div>
 
-        <hr class="my-4">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-blue-100 text-sm font-medium">Citas Hoy</p>
+                        <p class="text-3xl font-bold">12</p>
+                    </div>
+                    <div class="bg-blue-400 bg-opacity-30 rounded-full p-3">
+                        <i class="bi bi-calendar-week text-2xl"></i>
+                    </div>
+                </div>
+            </div>
 
-        <div class="row text-center">
-            <div class="col-lg-4 mb-3">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <i class="bi bi-calendar-week-fill fs-1 text-primary"></i>
-                        <h5 class="card-title mt-3">Gestionar Agenda</h5>
-                        <p class="card-text">Visualiza y administra todas las citas en el calendario.</p>
-                        <a th:href="@{/citas}" class="btn btn-primary">Ir a la Agenda</a>
+            <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-green-100 text-sm font-medium">Clientes Activos</p>
+                        <p class="text-3xl font-bold">248</p>
+                    </div>
+                    <div class="bg-green-400 bg-opacity-30 rounded-full p-3">
+                        <i class="bi bi-people text-2xl"></i>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 mb-3">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <i class="bi bi-people-fill fs-1 text-success"></i>
-                        <h5 class="card-title mt-3">Administrar Clientes</h5>
-                        <p class="card-text">Consulta, añade o edita la información de tus clientes.</p>
-                        <a th:href="@{/clientes}" class="btn btn-success">Ver Clientes</a>
+
+            <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-purple-100 text-sm font-medium">Ingresos del Mes</p>
+                        <p class="text-3xl font-bold">₲2.5M</p>
+                    </div>
+                    <div class="bg-purple-400 bg-opacity-30 rounded-full p-3">
+                        <i class="bi bi-currency-dollar text-2xl"></i>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 mb-3">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <i class="bi bi-box-seam-fill fs-1 text-warning"></i>
-                        <h5 class="card-title mt-3">Control de Inventario</h5>
-                        <p class="card-text">Gestiona el stock de tus productos de venta y uso interno.</p>
-                        <a th:href="@{/productos}" class="btn btn-warning">Ver Productos</a>
+        </div>
+
+        <!-- Action Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow duration-200">
+                <div class="text-center">
+                    <div
+                        class="bg-blue-100 dark:bg-blue-900 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="bi bi-calendar-week-fill text-2xl text-blue-600 dark:text-blue-400"></i>
                     </div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Gestionar Agenda</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Visualiza y administra todas las citas en el
+                        calendario.</p>
+                    <a th:href="@{/citas}"
+                        class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                        <i class="bi bi-arrow-right mr-2"></i>
+                        Ir a la Agenda
+                    </a>
+                </div>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow duration-200">
+                <div class="text-center">
+                    <div
+                        class="bg-green-100 dark:bg-green-900 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="bi bi-people-fill text-2xl text-green-600 dark:text-green-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Administrar Clientes</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Consulta, añade o edita la información de tus
+                        clientes.</p>
+                    <a th:href="@{/clientes}"
+                        class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200">
+                        <i class="bi bi-arrow-right mr-2"></i>
+                        Ver Clientes
+                    </a>
+                </div>
+            </div>
+
+            <div
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow duration-200">
+                <div class="text-center">
+                    <div
+                        class="bg-amber-100 dark:bg-amber-900 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="bi bi-box-seam-fill text-2xl text-amber-600 dark:text-amber-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Control de Inventario</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Gestiona el stock de tus productos de venta y uso
+                        interno.</p>
+                    <a th:href="@{/productos}"
+                        class="inline-flex items-center px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors duration-200">
+                        <i class="bi bi-arrow-right mr-2"></i>
+                        Ver Productos
+                    </a>
                 </div>
             </div>
         </div>
