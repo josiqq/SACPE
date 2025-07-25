@@ -19,7 +19,7 @@ public class LicenseInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // Rutas públicas que no requieren validación de licencia
         String requestURI = request.getRequestURI();
-        if (requestURI.equals("/licencia-expirada") || requestURI.startsWith("/css/") || requestURI.startsWith("/js/")) {
+        if (requestURI.equals("/licencia-expirada") || requestURI.startsWith("/assets/") || requestURI.startsWith("/js/")) {
             return true;
         }
 

@@ -1,1 +1,28 @@
-holi
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>Citas</title>
+</head>
+
+<body th:with="pageTitle='Citas', pageSubtitle='Administración de citas.'">
+
+    <th:block layout:fragment="breadcrumb-items">
+    <li class="breadcrumb-item active" aria-current="page">Citas</li>
+</th:block>
+
+    <div layout:fragment="main-content-body">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">¡Bienvenido!</h4>
+            </div>
+            <div class="card-body">
+                <p>Este es el contenido de la página citas, donde puedes poner gráficos y datos.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

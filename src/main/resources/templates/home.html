@@ -3,12 +3,33 @@
     layout:decorate="~{layout}">
 
 <head>
-    <title>Inicio - SACPE</title>
+    <title>Página de Inicio</title>
 </head>
 
-<body>
-    <div layout:fragment="content">
-        
+<body th:with="pageTitle='Página de Inicio', pageSubtitle='Resumen general del sistema.'">
+
+    <th:block layout:fragment="breadcrumb-items">
+    <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+</th:block>
+
+    <div layout:fragment="main-content-body">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">¡Bienvenido!</h4>
+            </div>
+            <div class="card-body">
+                <p>Este es el contenido de la página principal, donde puedes poner gráficos y datos.</p>
+            </div>
+        </div>
+        <div class="card">
+             <div class="card-header">
+                <h4 class="card-title">Actividad Reciente</h4>
+            </div>
+            <div class="card-body">
+                <p>Aquí podría ir una tabla o lista de actividades.</p>
+            </div>
+        </div>
     </div>
+
 </body>
 </html>

@@ -31,7 +31,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                 // Permite el acceso sin login a estas rutas
                 .requestMatchers("/login", "/assets/**").permitAll()
-                // Cualquier otra petición requiere estar autenticado
+
+                // Cualquier otra petición requiere estar autenticado redirigiéndose a la página de logi
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
@@ -41,9 +42,12 @@ public class SecurityConfig {
                 .permitAll()
             )
             .logout(logout -> logout
-                .logoutSuccessUrl("/login?logout") // A dónde ir después de cerrar sesión
-                .permitAll()
-            );
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/login?logout")
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID")
+            .permitAll()
+        );
 
         return http.build();
     }
