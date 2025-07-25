@@ -47,7 +47,6 @@ public class Servicio {
     @ManyToMany(mappedBy = "servicios", fetch = FetchType.LAZY)
     private Set<Cita> citas = new HashSet<>();
 
-
     // --- Constructores ---
 
     public Servicio() {

@@ -3,6 +3,8 @@ package com.sacpe.service;
 import com.sacpe.enums.PuestoEmpleado;
 import com.sacpe.model.Empleado;
 import com.sacpe.repository.EmpleadoRepository;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +16,10 @@ public class EmpleadoService {
 
     private final EmpleadoRepository empleadoRepository;
 
-    public EmpleadoService(EmpleadoRepository empleadoRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+    public EmpleadoService(EmpleadoRepository empleadoRepository, PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
         this.empleadoRepository = empleadoRepository;
     }
 
@@ -33,6 +38,14 @@ public class EmpleadoService {
                 throw new IllegalStateException("El email '" + empleado.getEmail() + "' ya está en uso.");
             }
         }
+        if (empleado.getId() != null && (empleado.getPassword() == null || empleado.getPassword().isEmpty())) {
+            empleadoRepository.findById(empleado.getId()).ifPresent(empleadoExistente -> {
+                empleado.setPassword(empleadoExistente.getPassword());
+            });
+        } else {
+            empleado.setPassword(passwordEncoder.encode(empleado.getPassword()));
+        }
+
         return empleadoRepository.save(empleado);
     }
 

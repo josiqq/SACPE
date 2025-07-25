@@ -4,6 +4,7 @@ import com.sacpe.enums.EstadoCita;
 import com.sacpe.enums.EstadoFactura;
 import com.sacpe.enums.MetodoPago;
 import com.sacpe.model.Cita;
+import com.sacpe.model.Empleado;
 import com.sacpe.model.Factura;
 import com.sacpe.model.Servicio;
 import com.sacpe.repository.CitaRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -30,30 +32,41 @@ public class FacturaService {
     /**
      * Genera una factura para una cita que ha sido completada.
      *
-     * @param citaId El ID de la cita a facturar.
+     * @param citaId     El ID de la cita a facturar.
      * @param metodoPago El método de pago utilizado.
      * @return La factura recién creada.
-     * @throws IllegalStateException si la cita no existe, no está completada o ya fue facturada.
+     * @throws IllegalStateException si la cita no existe, no está completada o ya
+     *                               fue facturada.
      */
     @Transactional
     public Factura generarFacturaDeCita(Long citaId, MetodoPago metodoPago) throws IllegalStateException {
         Cita cita = citaRepository.findById(citaId)
                 .orElseThrow(() -> new IllegalStateException("No se encontró la cita con ID: " + citaId));
 
-        // --- MEJORA 1: Validar estado ---
         if (cita.getEstado() != EstadoCita.COMPLETADA) {
             throw new IllegalStateException("Solo se pueden facturar citas en estado 'COMPLETADA'.");
         }
 
-        // --- MEJORA 2: Validar que no exista ya una factura para esta cita ---
         if (facturaRepository.findByCita_Id(citaId).isPresent()) {
             throw new IllegalStateException("La cita con ID: " + citaId + " ya ha sido facturada.");
         }
 
-        // ... resto del método sin cambios ...
+        if (cita.getServicios().isEmpty()) {
+            throw new IllegalStateException("La cita con ID: " + citaId + " no tiene servicios asociados.");
+        }
+
         BigDecimal montoTotal = cita.getServicios().stream()
                 .map(Servicio::getPrecio)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+        
+        BigDecimal montoComision = BigDecimal.ZERO;
+        Empleado estilista = cita.getEstilista();
+
+        // Verificamos si el estilista y su comisión son válidos
+        if (estilista != null && estilista.getComision() != null && estilista.getComision().compareTo(BigDecimal.ZERO) > 0) {
+            BigDecimal porcentajeComision = estilista.getComision().divide(new BigDecimal("100"));
+            montoComision = montoTotal.multiply(porcentajeComision).setScale(2, RoundingMode.HALF_UP);
+        }
 
         Factura factura = new Factura();
         factura.setCita(cita);
@@ -62,6 +75,7 @@ public class FacturaService {
         factura.setMetodoPago(metodoPago);
         factura.setEstado(EstadoFactura.PAGADA);
         factura.setNumeroFactura(generarNumeroFactura());
+        factura.setMontoComision(montoComision); // Guardamos la comisión calculada
 
         return facturaRepository.save(factura);
     }
@@ -85,7 +99,7 @@ public class FacturaService {
      * Busca facturas en un rango de fechas.
      *
      * @param inicio Fecha de inicio del rango.
-     * @param fin Fecha de fin del rango.
+     * @param fin    Fecha de fin del rango.
      * @return Lista de facturas.
      */
     @Transactional(readOnly = true)
@@ -95,6 +109,7 @@ public class FacturaService {
 
     /**
      * Busca una factura por su ID.
+     * 
      * @param id El ID de la factura a buscar.
      * @return Un Optional que contiene la factura si se encuentra.
      */

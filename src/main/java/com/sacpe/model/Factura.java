@@ -42,6 +42,10 @@ public class Factura {
     @Column(nullable = false, length = 20)
     private EstadoFactura estado;
 
+    @DecimalMin(value = "0.0")
+    @Column(precision = 10, scale = 2)
+    private BigDecimal montoComision;
+
     // --- Relaciones ---
 
     // Una factura se genera a partir de una única cita.
@@ -109,5 +113,13 @@ public class Factura {
 
     public void setCita(Cita cita) {
         this.cita = cita;
+    }
+
+    public BigDecimal getMontoComision() {
+        return montoComision;
+    }
+
+    public void setMontoComision(BigDecimal montoComision) {
+        this.montoComision = montoComision;
     }
 }

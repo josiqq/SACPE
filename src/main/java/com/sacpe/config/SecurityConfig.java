@@ -30,14 +30,14 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authorize -> authorize
                 // Permite el acceso sin login a estas rutas
-                .requestMatchers("/login", "/css/**", "/js/**", "/img/**").permitAll()
+                .requestMatchers("/login", "/assets/**").permitAll()
                 // Cualquier otra petición requiere estar autenticado
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")             // URL de nuestra página de login personalizada
                 .loginProcessingUrl("/login")    // URL que procesa el login (Spring Security se encarga)
-                .defaultSuccessUrl("/citas", true) // A dónde ir después de un login exitoso
+                .defaultSuccessUrl("/", true) // A dónde ir después de un login exitoso
                 .permitAll()
             )
             .logout(logout -> logout

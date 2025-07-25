@@ -2,12 +2,14 @@ package com.sacpe.model;
 
 import com.sacpe.enums.PuestoEmpleado;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,11 @@ public class Empleado {
     @NotEmpty(message = "La contraseña no puede estar vacía.")
     @Column(nullable = false)
     private String password;
+
+    @DecimalMin(value = "0.0", message = "La comisión no puede ser negativa.")
+    @Column(precision = 5, scale = 2) // Ej: 5.25% o 15.50%
+    private BigDecimal comision;
+
     // --- Relaciones ---
 
     // Un empleado puede atender muchas citas.
@@ -133,5 +140,13 @@ public class Empleado {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public BigDecimal getComision() {
+        return comision;
+    }
+
+    public void setComision(BigDecimal comision) {
+        this.comision = comision;
     }
 }
