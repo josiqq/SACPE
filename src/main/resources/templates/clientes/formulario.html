@@ -1,49 +1,84 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
 <head>
-    <title th:text="${titulo}">Formulario de Cliente</title>
+    <title th:text="${titulo}"></title>
 </head>
-<body>
-<div layout:fragment="content">
-    <h1 th:text="${titulo}">Formulario de Cliente</h1>
 
-    <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post">
-        
-        <input type="hidden" th:field="*{id}" />
+<body th:with="pageTitle=${titulo}, pageSubtitle='Crear nuevo cliente.'">
 
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
-            <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
-        </div>
-        
-        <div class="mb-3">
-            <label for="apellido" class="form-label">Apellido</label>
-            <input type="text" class="form-control" id="apellido" th:field="*{apellido}" required>
-            <div class="text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
-        </div>
+    <th:block layout:fragment="breadcrumb-items">
+    <li class="breadcrumb-item active" aria-current="page" th:text="${titulo}"></li>
+</th:block>
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" th:field="*{email}">
-            <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+    <div layout:fragment="main-content-body">
+        <div class="row match-height">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title" th:text="${titulo}"></h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form">
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">Nombre</label>
+                                            <input type="text" id="first-name-column" class="form-control" placeholder="Nombre" name="fname-column">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="last-name-column">Apellido</label>
+                                            <input type="text" id="last-name-column" class="form-control" placeholder="Apellido" name="lname-column">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="city-column">Ciudad</label>
+                                            <input type="text" id="city-column" class="form-control" placeholder="Ciudad" name="city-column">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="country-floating">País</label>
+                                            <input type="text" id="country-floating" class="form-control" name="country-floating" placeholder="País">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="company-column">RUC</label>
+                                            <input type="text" id="company-column" class="form-control" name="company-column" placeholder="RUC">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="email-id-column">Email</label>
+                                            <input type="email" id="email-id-column" class="form-control" name="email-id-column" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <div class="form-check">
+                                            <div class="checkbox">
+                                                <input type="checkbox" id="checkbox5" class="form-check-input" checked="">
+                                                <label for="checkbox5">Remember Me</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="mb-3">
-            <label for="telefono" class="form-label">Teléfono</label>
-            <input type="tel" class="form-control" id="telefono" th:field="*{telefono}">
-        </div>
+    </div>
 
-        <div class="mb-3">
-            <label for="notas" class="form-label">Notas (Alergias, preferencias, etc.)</label>
-            <textarea class="form-control" id="notas" rows="3" th:field="*{notas}"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-success">Guardar</button>
-        <a th:href="@{/clientes}" class="btn btn-secondary">Cancelar</a>
-    </form>
-</div>
 </body>
 </html>
