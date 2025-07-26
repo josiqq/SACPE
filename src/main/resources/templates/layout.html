@@ -12,6 +12,9 @@
         type="image/png">
     <link rel="stylesheet" th:href="@{/assets/compiled/css/app.css}">
     <link rel="stylesheet" th:href="@{/assets/compiled/css/app-dark.css}">
+    <th:block layout:fragment="page-css"></th:block>
+</head>
+
 </head>
 
 <body>
@@ -64,99 +67,75 @@
                     <ul class="menu">
                         <li class="sidebar-title">Usuario: <span th:text="${#authentication.name}"></span></li>
 
-                        <li class="sidebar-item  ">
-                            <a href="/" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
+                        <li class="sidebar-item">
+    <a href="/citas" class='sidebar-link'>
+        <i class="bi bi-calendar-event"></i>
+        <span>Agenda / Calendario</span>
+    </a>
+</li>
 
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
-                                <span>Credenciales</span>
-                            </a>
+<li class="sidebar-item has-sub">
+    <a href="#" class='sidebar-link'>
+        <i class="bi bi-briefcase-fill"></i>
+        <span>Gestión</span>
+    </a>
+    <ul class="submenu">
+        <li class="submenu-item">
+            <a href="/citas/nuevo" class="submenu-link">Agendar Nueva Cita</a>
+        </li>
+        <li class="submenu-item">
+            <a href="/clientes" class="submenu-link">Clientes</a>
+        </li>
+        <li class="submenu-item">
+            <a href="/servicios" class="submenu-link">Servicios</a>
+        </li>
+         <li class="submenu-item">
+            <a href="/empleados" class="submenu-link">Personal</a>
+        </li>
+    </ul>
+</li>
 
-                            <ul class="submenu ">
+<li class="sidebar-item has-sub">
+    <a href="#" class='sidebar-link'>
+        <i class="bi bi-receipt"></i>
+        <span>Facturación</span>
+    </a>
+    <ul class="submenu">
+        <li class="submenu-item">
+            <a href="/facturas/pendientes" class="submenu-link">Citas por Facturar</a>
+        </li>
+        </ul>
+</li>
 
-                                <li class="submenu-item  ">
-                                    <a href="component-tooltip" class="submenu-link">Tooltip</a>
+<li class="sidebar-item has-sub">
+    <a href="#" class='sidebar-link'>
+        <i class="bi bi-box-seam"></i>
+        <span>Inventario</span>
+    </a>
+    <ul class="submenu">
+        <li class="submenu-item">
+            <a href="/productos" class="submenu-link">Productos</a>
+        </li>
+        <li class="submenu-item">
+            <a href="/proveedores" class="submenu-link">Proveedores</a>
+        </li>
+    </ul>
+</li>
 
-                                </li>
-
-                            </ul>
-
-
-                        </li>
-
-                        <li class="sidebar-title">Forms &amp; Tables</li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-hexagon-fill"></i>
-                                <span>Form Elements</span>
-                            </a>
-
-                            <ul class="submenu ">
-
-                                <li class="submenu-item  ">
-                                    <a href="form-element-input" class="submenu-link">Input</a>
-
-                                </li>
-
-                                <li class="submenu-item  ">
-                                    <a href="form-element-input-group" class="submenu-link">Input Group</a>
-
-                                </li>
-
-                                <li class="submenu-item  ">
-                                    <a href="form-element-select" class="submenu-link">Select</a>
-
-                                </li>
-
-                                <li class="submenu-item  ">
-                                    <a href="form-element-radio" class="submenu-link">Radio</a>
-
-                                </li>
-
-                                <li class="submenu-item  ">
-                                    <a href="form-element-checkbox" class="submenu-link">Checkbox</a>
-
-                                </li>
-
-                                <li class="submenu-item  ">
-                                    <a href="form-element-textarea" class="submenu-link">Textarea</a>
-
-                                </li>
-
-                            </ul>
-
-
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="form-layout" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Form Layout</span>
-                            </a>
-
-
-                        </li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="reportes" class='sidebar-link'>
-                                <i class="bi bi-file-text-fill"></i>
-                                <span>Reportes</span>
-                            </a>
-
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="reportes" class="submenu-link">Reportes</a>
-                                </li>
-                            </ul>
-
-
-                        </li>
+<li class="sidebar-item has-sub">
+    <a href="#" class='sidebar-link'>
+        <i class="bi bi-file-text-fill"></i>
+        <span>Reportes</span>
+    </a>
+    <ul class="submenu">
+        <li class="submenu-item">
+            <a href="/reportes/stock-valorizado" class="submenu-link">Stock Valorizado</a>
+        </li>
+        <li class="submenu-item">
+            <a href="/reportes/stock-valorizado-por-proveedor" class="submenu-link">Stock Valorizado por Proveedor</a>
+        </li>
+    </ul>
+</li>
                     </ul>
                 </div>
             </div>
@@ -306,6 +285,8 @@
     <script th:src="@{/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
 
     <script th:src="@{/assets/compiled/js/app.js}"></script>
+    <th:block layout:fragment="page-js"></th:block>
+</body>
 </body>
 
 </html>
